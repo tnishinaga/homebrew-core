@@ -4,7 +4,7 @@ class Llvm < Formula
   # The LLVM Project is under the Apache License v2.0 with LLVM Exceptions
   license "Apache-2.0"
   revision 1
-  head "https://github.com/llvm/llvm-project.git"
+  head "https://github.com/llvm/llvm-project.git", :branch => "main"
 
   stable do
     url "https://github.com/llvm/llvm-project/releases/download/llvmorg-11.0.0/llvm-project-11.0.0.tar.xz"
@@ -67,9 +67,17 @@ class Llvm < Formula
   # Upstream ARM patch for OpenMP runtime, remove in next version
   # https://reviews.llvm.org/D91002
   # https://bugs.llvm.org/show_bug.cgi?id=47609
-  patch do
-    url "https://raw.githubusercontent.com/Homebrew/formula-patches/6166a68c/llvm/openmp_arm.patch"
-    sha256 "70fe3836b423e593688cd1cc7a3d76ee6406e64b9909f1a2f780c6f018f89b1e"
+  stable do
+    patch do
+      url "https://raw.githubusercontent.com/Homebrew/formula-patches/6166a68c/llvm/openmp_arm.patch"
+      sha256 "70fe3836b423e593688cd1cc7a3d76ee6406e64b9909f1a2f780c6f018f89b1e"
+    end
+  end
+
+  head do
+    patch do
+      url "https://gist.githubusercontent.com/tnishinaga/08ce70aef51b000a682ddb13cdb84949/raw/3ca45d3727136be905b7b537be565853cedc3da9/support_arm_mac.patch"
+    end
   end
 
   def install
